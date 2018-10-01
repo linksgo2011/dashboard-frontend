@@ -1,4 +1,10 @@
-# A chrome plugin for new tab
+# A chrome plugin for new tab base on Vue.js
+
+# Tech stack 
+
+- Vue.js
+- Webpack
+- Chrome Plugin
 
 ## Build Setup
 
