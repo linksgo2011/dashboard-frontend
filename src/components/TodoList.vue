@@ -1,48 +1,47 @@
 <template>
-<section class="todoapp">
-  <header class="header">
-    <h1>todos</h1>
-    <input class="new-todo"
-      autofocus autocomplete="off"
-      placeholder="What needs to be done?"
-      v-model="newTodo"
-      @keyup.enter="addTodo">
-  </header>
-  <section class="main" v-show="todos.length" v-cloak>
-    <input class="toggle-all" type="checkbox" v-model="allDone">
-    <ul class="todo-list">
-      <li v-for="todo in filteredTodos"
-        class="todo"
-        :key="todo.id"
-        :class="{ completed: todo.completed, editing: todo == editedTodo }">
-        <div class="view">
-          <input class="toggle" type="checkbox" v-model="todo.completed">
-          <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-          <button class="destroy" @click="removeTodo(todo)"></button>
-        </div>
-        <input class="edit" type="text"
-          v-model="todo.title"
-          v-todo-focus="todo == editedTodo"
-          @blur="doneEdit(todo)"
-          @keyup.enter="doneEdit(todo)"
-          @keyup.esc="cancelEdit(todo)">
-      </li>
-    </ul>
+  <section class="todoapp" id="todo-list">
+    <header class="header">
+      <input class="new-todo"
+        autofocus autocomplete="off"
+        placeholder="What needs to be done?"
+        v-model="newTodo"
+        @keyup.enter="addTodo">
+    </header>
+    <section class="main" v-show="todos.length" v-cloak>
+      <input class="toggle-all" type="checkbox" v-model="allDone">
+      <ul class="todo-list">
+        <li v-for="todo in filteredTodos"
+          class="todo"
+          :key="todo.id"
+          :class="{ completed: todo.completed, editing: todo == editedTodo }">
+          <div class="view">
+            <input class="toggle" type="checkbox" v-model="todo.completed">
+            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+            <button class="destroy" @click="removeTodo(todo)"></button>
+          </div>
+          <input class="edit" type="text"
+            v-model="todo.title"
+            v-todo-focus="todo == editedTodo"
+            @blur="doneEdit(todo)"
+            @keyup.enter="doneEdit(todo)"
+            @keyup.esc="cancelEdit(todo)">
+        </li>
+      </ul>
+    </section>
+    <footer class="footer" v-show="todos.length" v-cloak>
+      <span class="todo-count">
+        <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
+      </span>
+      <ul class="filters">
+        <li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
+        <li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
+        <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
+      </ul>
+      <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
+        Clear completed
+      </button>
+    </footer>
   </section>
-  <footer class="footer" v-show="todos.length" v-cloak>
-    <span class="todo-count">
-      <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
-    </span>
-    <ul class="filters">
-      <li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
-      <li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
-      <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
-    </ul>
-    <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
-      Clear completed
-    </button>
-  </footer>
-</section>
 </template>
 
 <script>
@@ -200,56 +199,6 @@ data: function(){
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    font-size: 100%;
-    vertical-align: baseline;
-    font-family: inherit;
-    font-weight: inherit;
-    color: inherit;
-    -webkit-appearance: none;
-    appearance: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.4em;
-    background: #f5f5f5;
-    color: #4d4d4d;
-    min-width: 230px;
-    max-width: 550px;
-    margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 300;
-  }
-
-  :focus {
-    outline: 0;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .todoapp {
-    background: #fff;
-    margin: 130px 0 40px 0;
-    position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-    0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
 
   .todoapp input::-webkit-input-placeholder {
     font-style: italic;
@@ -267,19 +216,6 @@ data: function(){
     font-style: italic;
     font-weight: 300;
     color: #e6e6e6;
-  }
-
-  .todoapp h1 {
-    position: absolute;
-    top: -155px;
-    width: 100%;
-    font-size: 100px;
-    font-weight: 100;
-    text-align: center;
-    color: rgba(175, 47, 47, 0.15);
-    -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
   }
 
   .new-todo,
@@ -377,7 +313,7 @@ data: function(){
     /* auto, since non-WebKit browsers doesn't support input styling */
     height: auto;
     position: absolute;
-    top: 0;
+    left: 0;
     bottom: 0;
     margin: auto 0;
     border: none; /* Mobile Safari */
