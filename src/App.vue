@@ -1,18 +1,20 @@
 <template>
   <div id="app">
     <TodoList/>
-    <section id="links"></section>
+    <Navigator />
     <section id="notes"></section>
   </div>
 </template>
 
 <script>
-import TodoList from './components/TodoList'
+import TodoList from './components/todo-list/TodoList.vue'
+import Navigator from './components/navigator/Navigator.vue'
 
 export default {
   name: 'App',
   components: {
-    TodoList
+    TodoList,
+    Navigator
   }
 }
 </script>
