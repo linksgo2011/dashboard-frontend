@@ -2,19 +2,21 @@
   <div id="app">
     <TodoList/>
     <Navigator />
-    <section id="notes"></section>
+    <Notes />
   </div>
 </template>
 
 <script>
 import TodoList from './components/todo-list/TodoList.vue'
 import Navigator from './components/navigator/Navigator.vue'
+import Notes from './components/notes/Notes.vue'
 
 export default {
   name: 'App',
   components: {
     TodoList,
-    Navigator
+    Navigator,
+    Notes
   }
 }
 </script>
@@ -36,18 +38,13 @@ html,
     font-family: inherit;
     font-weight: inherit;
     color: inherit;
-    -webkit-appearance: none;
     appearance: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     background: #f5f5f5;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
     font-weight: 300;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     text-align: center;
@@ -71,7 +68,7 @@ html,
     flex: 1;
     background: #fff;
     position: relative;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
     0 25px 50px 0 rgba(0, 0, 0, 0.1);
     margin:5px;
     height:100vh;
