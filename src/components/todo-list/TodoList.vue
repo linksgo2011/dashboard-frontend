@@ -36,6 +36,7 @@
         </li>
       </ul>
     </section>
+
     <footer class="footer" v-show="todos.length" v-cloak>
       <span class="todo-count">
         <strong>{{ remaining }}</strong>
@@ -62,22 +63,8 @@
 </template>
 
 <script>
-var STORAGE_KEY = "todos-vuejs-2.0";
-var todoStorage = {
-  fetch: function() {
-    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    todos.forEach(function(todo, index) {
-      todo.id = index;
-    });
-    todoStorage.uid = todos.length;
-    return todos;
-  },
-  save: function(todos) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-  }
-};
+import todoStorage from '../../store/todos.js';
 
-// visibility filters
 var filters = {
   all: function(todos) {
     return todos;
@@ -94,7 +81,6 @@ var filters = {
   }
 };
 
-// handle routing
 function onHashChange() {
   var visibility = window.location.hash.replace(/#\/?/, "");
   if (filters[visibility]) {
@@ -116,7 +102,6 @@ export default {
     };
   },
 
-  // watch todos change for localStorage persistence
   watch: {
     todos: {
       handler: function(todos) {
@@ -126,8 +111,6 @@ export default {
     }
   },
 
-  // computed properties
-  // http://vuejs.org/guide/computed.html
   computed: {
     filteredTodos: function() {
       return filters[this.visibility](this.todos);
