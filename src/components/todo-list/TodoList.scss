@@ -23,7 +23,7 @@
 .main {
   position: relative;
   z-index: 2;
-  border-top: 1px solid $bordorColor;
+  border-top: 1px solid $borderColor;
 
   label[for='toggle-all'] {
     display: none;
@@ -145,7 +145,7 @@
     padding: 20px 15px;
     height: 20px;
     text-align: center;
-    border-top: 1px solid $bordorColor;
+    border-top: 1px solid $borderColor;
     cursor: pointer;
 
     .todo-count {

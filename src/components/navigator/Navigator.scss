@@ -1,5 +1,39 @@
+@import "@/styles/base.scss";
+@import "@/styles/buttons.scss";
+
+
 #navigator{
     ul{
         list-style: none;
+        margin:0px;
+        padding: 0px;
+    }
+
+    .navigator-add-form{
+        border-bottom: 1px solid $borderColor;
+        display: flex;
+        justify-content: space-around;
+        .input-contrl{
+            padding: 10px;
+            width: 100%;
+        }
+        input{
+            display: inline-block;
+            border: 1px solid $borderColor;
+            border-radius: 2px;
+            padding: 5px;
+        }
+
+        .buttons{
+            line-height: 100px;
+        }
+    }
+
+    .links-wrapper{
+        a {
+            color: #1EAEDB; }
+          a:hover {
+            color: #0FA0CE; }
+        line-height: 30px;
     }
 }

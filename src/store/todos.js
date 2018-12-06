@@ -1,16 +1,15 @@
-const STORAGE_KEY = 'dashboard-v1'
+import storage from './storage.js'
+
+const STORE_KEY = 'TODOS'
 
 export default {
   uuid: 0,
   fetch: function () {
-    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    todos.forEach(function (todo, index) {
-      todo.id = index
-    })
+    var todos = storage.fetchAll(STORE_KEY) || []
     this.uid = todos.length
     return todos
   },
   save: function (todos) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+    storage.saveAll(STORE_KEY, todos)
   }
 }
