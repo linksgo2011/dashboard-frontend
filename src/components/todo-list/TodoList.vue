@@ -43,14 +43,8 @@
         {{ remaining | pluralize }} left
       </span>
       <ul class="filters">
-        <li>
-          <a href="#/all" :class="{ selected: visibility == 'all' }">All</a>
-        </li>
-        <li>
-          <a href="#/active" :class="{ selected: visibility == 'active' }">Active</a>
-        </li>
-        <li>
-          <a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a>
+        <li v-for="type in filterTypes" :key="type">
+          <a @click.stop="filter(type)" :class="{ selected: visibility == type.toLowerCase() }">{{ type }}</a>
         </li>
       </ul>
       <button
@@ -63,131 +57,125 @@
 </template>
 
 <script>
-import todoStorage from '../../store/todos.js';
+import todoStorage from '../../store/todos.js'
 
 var filters = {
-  all: function(todos) {
-    return todos;
+  all: function (todos) {
+    return todos
   },
-  active: function(todos) {
-    return todos.filter(function(todo) {
-      return !todo.completed;
-    });
+  active: function (todos) {
+    return todos.filter(function (todo) {
+      return !todo.completed
+    })
   },
-  completed: function(todos) {
-    return todos.filter(function(todo) {
-      return todo.completed;
-    });
-  }
-};
-
-function onHashChange() {
-  var visibility = window.location.hash.replace(/#\/?/, "");
-  if (filters[visibility]) {
-    app.visibility = visibility;
-  } else {
-    window.location.hash = "";
-    app.visibility = "all";
+  completed: function (todos) {
+    return todos.filter(function (todo) {
+      return todo.completed
+    })
   }
 }
 
 export default {
-  name: "TodoList",
-  data: function() {
+  name: 'TodoList',
+  data: function () {
     return {
       todos: todoStorage.fetch(),
-      newTodo: "",
+      newTodo: '',
       editedTodo: null,
-      visibility: "all"
-    };
+      visibility: 'all',
+      filterTypes: ['All', 'Active', 'Completed']
+    }
   },
 
   watch: {
     todos: {
-      handler: function(todos) {
-        todoStorage.save(todos);
+      handler: function (todos) {
+        todoStorage.save(todos)
       },
       deep: true
     }
   },
 
   computed: {
-    filteredTodos: function() {
-      return filters[this.visibility](this.todos);
+    filteredTodos: function () {
+      return filters[this.visibility](this.todos)
     },
-    remaining: function() {
-      return filters.active(this.todos).length;
+    remaining: function () {
+      return filters.active(this.todos).length
     },
     allDone: {
-      get: function() {
-        return this.remaining === 0;
+      get: function () {
+        return this.remaining === 0
       },
-      set: function(value) {
-        this.todos.forEach(function(todo) {
-          todo.completed = value;
-        });
+      set: function (value) {
+        this.todos.forEach(function (todo) {
+          todo.completed = value
+        })
       }
     }
   },
 
   filters: {
-    pluralize: function(n) {
-      return n === 1 ? "item" : "items";
+    pluralize: function (n) {
+      return n === 1 ? 'item' : 'items'
     }
   },
 
   methods: {
-    addTodo: function() {
-      var value = this.newTodo && this.newTodo.trim();
+    addTodo: function () {
+      var value = this.newTodo && this.newTodo.trim()
       if (!value) {
-        return;
+        return
       }
       this.todos.push({
         id: todoStorage.uid++,
         title: value,
         completed: false
-      });
-      this.newTodo = "";
+      })
+      this.newTodo = ''
     },
 
-    removeTodo: function(todo) {
-      this.todos.splice(this.todos.indexOf(todo), 1);
+    removeTodo: function (todo) {
+      this.todos.splice(this.todos.indexOf(todo), 1)
     },
 
-    editTodo: function(todo) {
-      this.beforeEditCache = todo.title;
-      this.editedTodo = todo;
+    editTodo: function (todo) {
+      this.beforeEditCache = todo.title
+      this.editedTodo = todo
     },
 
-    doneEdit: function(todo) {
+    doneEdit: function (todo) {
       if (!this.editedTodo) {
-        return;
+        return
       }
-      this.editedTodo = null;
-      todo.title = todo.title.trim();
+      this.editedTodo = null
+      todo.title = todo.title.trim()
       if (!todo.title) {
-        this.removeTodo(todo);
+        this.removeTodo(todo)
       }
     },
 
-    cancelEdit: function(todo) {
-      this.editedTodo = null;
-      todo.title = this.beforeEditCache;
+    cancelEdit: function (todo) {
+      this.editedTodo = null
+      todo.title = this.beforeEditCache
     },
 
-    removeCompleted: function() {
-      this.todos = filters.active(this.todos);
+    removeCompleted: function () {
+      this.todos = filters.active(this.todos)
+    },
+    filter: function (visibility) {
+      this.visibility = visibility.toLowerCase()
     }
   },
 
   directives: {
-    "todo-focus": function(el, binding) {
+    'todo-focus': function (el, binding) {
       if (binding.value) {
-        el.focus();
+        el.focus()
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

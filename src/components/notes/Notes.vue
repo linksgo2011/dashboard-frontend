@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: "Notes"
-};
+  name: 'Notes'
+}
 </script>
 <style scoped>
 @import "Notes.less";

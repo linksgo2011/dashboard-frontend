@@ -63,7 +63,7 @@ html,
   #app {
     display: flex;
   }
-  
+
   #app > section{
     flex: 1;
     background: #fff;
