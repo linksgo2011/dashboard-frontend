@@ -9,6 +9,6 @@ export default {
   name: 'Notes'
 }
 </script>
-<style scoped>
-@import "Notes.less";
+<style lang="scss" scoped>
+@import "Notes.scss";
 </style>
