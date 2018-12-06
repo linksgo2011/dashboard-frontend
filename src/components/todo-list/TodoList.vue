@@ -17,22 +17,22 @@
           v-for="todo in filteredTodos"
           class="todo"
           :key="todo.id"
-          :class="{ completed: todo.completed, editing: todo == editedTodo }"
+          :class="{ completed: todo.completed}"
         >
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
-            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+            <input
+              class="edit"
+              type="text"
+              v-model="todo.title"
+              v-todo-focus="todo == editedTodo"
+              @blur="doneEdit(todo)"
+              @keyup.enter="doneEdit(todo)"
+              @keyup.esc="cancelEdit(todo)"
+            >
             <button class="destroy" @click="removeTodo(todo)"></button>
+
           </div>
-          <input
-            class="edit"
-            type="text"
-            v-model="todo.title"
-            v-todo-focus="todo == editedTodo"
-            @blur="doneEdit(todo)"
-            @keyup.enter="doneEdit(todo)"
-            @keyup.esc="cancelEdit(todo)"
-          >
         </li>
       </ul>
     </section>
@@ -44,7 +44,10 @@
       </span>
       <ul class="filters">
         <li v-for="type in filterTypes" :key="type">
-          <a @click.stop="filter(type)" :class="{ selected: visibility == type.toLowerCase() }">{{ type }}</a>
+          <a
+            @click.stop="filter(type)"
+            :class="{ selected: visibility == type.toLowerCase() }"
+          >{{ type }}</a>
         </li>
       </ul>
       <button
@@ -58,6 +61,8 @@
 
 <script>
 import todoStorage from '../../store/todos.js'
+
+const MAX_NOTE_LENGTH = 30
 
 var filters = {
   all: function (todos) {
@@ -123,7 +128,7 @@ export default {
 
   methods: {
     addTodo: function () {
-      var value = this.newTodo && this.newTodo.trim()
+      var value = this.newTodo && this.newTodo.trim().substr(0, MAX_NOTE_LENGTH)
       if (!value) {
         return
       }
@@ -178,6 +183,6 @@ export default {
 }
 </script>
 
-<style scoped>
-@import "TodoList.less";
+<style lang="scss"  scoped >
+@import "TodoList.scss";
 </style>

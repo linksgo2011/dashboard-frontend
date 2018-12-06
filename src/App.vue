@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TodoList from './components/todo-list/TodoList.vue'
+import TodoList from '@/components/todo-list/TodoList.vue'
 import Navigator from './components/navigator/Navigator.vue'
 import Notes from './components/notes/Notes.vue'
 
@@ -22,6 +22,8 @@ export default {
 </script>
 
 <style>
+@import "styles/normalize.css";
+
 html,
   body {
     margin: 0;
@@ -68,9 +70,9 @@ html,
     flex: 1;
     background: #fff;
     position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-    0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
     margin:5px;
     height:100vh;
+    overflow: hidden;
   }
 </style>
