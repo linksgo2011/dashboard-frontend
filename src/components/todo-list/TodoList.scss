@@ -13,7 +13,6 @@
   margin: 0;
   width: 100%;
   border:none;
-  font-size: 24px;
   line-height: 1.4em;
   padding: 16px 16px 16px 60px;
   -webkit-font-smoothing: antialiased;
@@ -52,7 +51,6 @@
   
 }
 
-
   .todo-list {
     margin: 0;
     padding: 0;
@@ -60,7 +58,6 @@
 
     li {
       position: relative;
-      font-size: 24px;
       border-bottom: 1px solid #ededed;
     }
   
@@ -100,11 +97,11 @@
     }
   
      li .toggle:after {
-      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
+      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#d1d1d1" stroke-width="3"/></svg>');
     }
   
     li .toggle:checked:after {
-      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+      content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
     }
 
      li .destroy {
