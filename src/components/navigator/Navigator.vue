@@ -18,44 +18,56 @@
     </form>
     <ul class="links-wrapper">
       <li v-for="link in links" :key="link.uuid">
-        <a :href="link.link">{{link.text}}</a>
+        <a @click.prevent="directTo(link.link)" :href="link.link">{{link.text}}</a>
+        <v-icon small @click="deleteLink(link)">delete</v-icon>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-import linkStore from '../../store/links.js'
+import linkStore from "../../store/links.js";
 
 export default {
-  name: 'Navigator',
-  data: function () {
+  name: "Navigator",
+  data: function() {
     return {
       links: [],
       form: {
-        text: '',
-        link: ''
+        text: "",
+        link: ""
       }
-    }
+    };
   },
   methods: {
-    addLink: function () {
-      this.links = [...this.links, {
-        uuid: this.links.length + 1,
-        text: this.form.text,
-        link: this.form.link
-      }]
-      linkStore.save(this.links)
+    addLink: function() {
+      this.links = [
+        ...this.links,
+        {
+          uuid: this.links.length + 1,
+          text: this.form.text,
+          link: this.form.link
+        }
+      ];
+      linkStore.save(this.links);
 
-      this.form.text = ''
-      this.form.link = ''
+      this.form.text = "";
+      this.form.link = "";
+    },
+    deleteLink(link) {
+      this.links = [
+        ...this.links.filter(current => current.uuid !== link.uuid)
+      ];
+      linkStore.save(this.links);
+    },
+    directTo(link) {
+      window.open(link);
     }
   },
-  mounted: function () {
-    this.links = linkStore.fetch()
-    console.log(this.links)
+  mounted: function() {
+    this.links = linkStore.fetch();
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

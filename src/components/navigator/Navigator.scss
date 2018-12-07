@@ -30,10 +30,42 @@
     }
 
     .links-wrapper{
-        a {
-            color: #1EAEDB; }
-          a:hover {
-            color: #0FA0CE; }
-        line-height: 30px;
+
+
+        li{
+            a {
+                font-size:14px;
+                color: $primaryTextColor; 
+                text-decoration: none;
+            }
+              a:hover {
+                color:$primary; 
+            }
+            line-height: 30px;
+            padding: 0px 30px;
+            border:1px dashed white;
+            vertical-align: middle;
+            position: relative;
+            
+            .v-icon{
+                display: none;
+                position: absolute;
+                top:5px;
+                right:10px;
+                &:hover{
+                    color: $primary;
+                }
+            }
+            
+            &:hover{
+                border:1px dashed $primaryTextColor;
+                cursor: pointer;
+                .v-icon{
+                    display: inline-block;
+                }
+            }
+
+        }
+
     }
 }
