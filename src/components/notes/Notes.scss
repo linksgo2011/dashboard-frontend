@@ -4,6 +4,7 @@
     .tabs{
         list-style: none;
         display:flex;
+        flex-wrap: wrap;
         li{
             display: inline-box;
             cursor: pointer;
@@ -14,7 +15,13 @@
             &.active{
                 color:$activeColor;
             }
+
+            &:last-child{
+                border-right:none;
+            }
         }
+
+
     }
 
     textarea{

@@ -62,7 +62,7 @@
 <script>
 import todoStorage from '../../store/todos.js'
 
-const MAX_NOTE_LENGTH = 30
+const MAX_NOTE_LENGTH = 100
 
 var filters = {
   all: function (todos) {
