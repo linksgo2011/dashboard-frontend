@@ -4,7 +4,6 @@ import App from './App'
 
 Vue.config.productionTip = false
 
- 
 Vue.use(Vuetify)
 
 new Vue({

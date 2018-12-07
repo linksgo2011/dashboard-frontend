@@ -10,8 +10,8 @@
 import TodoList from '@/components/todo-list/TodoList.vue'
 import Navigator from './components/navigator/Navigator.vue'
 import Notes from './components/notes/Notes.vue'
-import 'vuetify/dist/vuetify.min.css';
-import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 export default {
   name: 'App',
@@ -24,7 +24,6 @@ export default {
 </script>
 
 <style>
-
 
 html,
   body {

@@ -1,5 +1,26 @@
-#notes textarea{
-    width: 100%;
-    padding: 10px;
-    border:0px;
+@import "@/styles/base.scss";
+
+#notes {
+    .tabs{
+        list-style: none;
+        display:flex;
+        li{
+            display: inline-box;
+            cursor: pointer;
+            line-height: 40px;
+            padding: 0 10px;
+            border-right: 1px solid $borderColor;
+            text-transform: uppercase;
+            &.active{
+                color:$activeColor;
+            }
+        }
+    }
+
+    textarea{
+        width: 100%;
+        padding: 10px;
+        border:0px;
+    }
 }
+

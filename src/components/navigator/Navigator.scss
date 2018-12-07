@@ -30,9 +30,16 @@
     }
 
     .links-wrapper{
-
-
+        margin-top:10px;
+        display: flex;
+		flex-direction: row;
+        flex-wrap: wrap;
+        
         li{
+            box-sizing: border-box;
+            width: 50%;
+            overflow: hidden;
+            text-overflow : ellipsis;
             a {
                 font-size:14px;
                 color: $primaryTextColor; 

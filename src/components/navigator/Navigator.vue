@@ -26,21 +26,21 @@
 </template>
 
 <script>
-import linkStore from "../../store/links.js";
+import linkStore from '../../store/links.js'
 
 export default {
-  name: "Navigator",
-  data: function() {
+  name: 'Navigator',
+  data: function () {
     return {
       links: [],
       form: {
-        text: "",
-        link: ""
+        text: '',
+        link: ''
       }
-    };
+    }
   },
   methods: {
-    addLink: function() {
+    addLink: function () {
       this.links = [
         ...this.links,
         {
@@ -48,26 +48,26 @@ export default {
           text: this.form.text,
           link: this.form.link
         }
-      ];
-      linkStore.save(this.links);
+      ]
+      linkStore.save(this.links)
 
-      this.form.text = "";
-      this.form.link = "";
+      this.form.text = ''
+      this.form.link = ''
     },
-    deleteLink(link) {
+    deleteLink (link) {
       this.links = [
         ...this.links.filter(current => current.uuid !== link.uuid)
-      ];
-      linkStore.save(this.links);
+      ]
+      linkStore.save(this.links)
     },
-    directTo(link) {
-      window.open(link);
+    directTo (link) {
+      window.open(link)
     }
   },
-  mounted: function() {
-    this.links = linkStore.fetch();
+  mounted: function () {
+    this.links = linkStore.fetch()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
