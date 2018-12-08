@@ -128,7 +128,7 @@ export default {
 
   methods: {
     addTodo: function () {
-      var value = this.newTodo && this.newTodo.trim().substr(0, MAX_NOTE_LENGTH)
+      var value = this.newTodo && this.newTodo.trim()
       if (!value) {
         return
       }
