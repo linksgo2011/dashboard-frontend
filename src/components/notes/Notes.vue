@@ -46,17 +46,17 @@ export default {
     switchTab: function (index) {
       this.tabIndex = index
     },
-    handleContentChange: function(){
-        notesStorage.save(this.notes)
+    handleContentChange: function () {
+      notesStorage.save(this.notes)
     },
-    createNote: function(){
+    createNote: function () {
       const tabIndex = this.notes.length
-  
+
       this.notes = [
         ...this.notes,
         {
           index: tabIndex,
-          tabName: 'note'+ (tabIndex + 1),
+          tabName: 'note' + (tabIndex + 1),
           text: ''
         }
       ]
@@ -64,9 +64,9 @@ export default {
       notesStorage.save(this.notes)
     }
   },
-  mounted:function(){
+  mounted: function () {
     this.notes = notesStorage.fetch()
-    if(!this.notes.length){
+    if (!this.notes.length) {
       this.createNote()
     }
   }

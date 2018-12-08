@@ -66,7 +66,6 @@ export default {
   },
   mounted: function () {
     this.links = linkStore.fetch()
-
   }
 }
 </script>
