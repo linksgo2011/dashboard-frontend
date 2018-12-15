@@ -57,6 +57,7 @@
 
     li {
       position: relative;
+      cursor: pointer;
       border-bottom: 1px solid #ededed;
     }
   
@@ -73,10 +74,10 @@
       word-break: break-all;
       padding: 15px 90px 15px 15px;
       margin-left: 45px;
+      border:none;
       display: block;
       box-sizing: border-box;
       width: 100%;
-      border:none;
       line-height: 1.2;
       transition: color 0.4s;
       color:#666;

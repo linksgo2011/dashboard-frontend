@@ -17,8 +17,9 @@
       </div>
     </form>
     <ul class="links-wrapper">
-      <li v-for="link in links" :key="link.uuid">
-        <a @click.prevent="directTo(link.link)" :href="link.link">{{link.text}}</a>
+      <li v-for="link in links" :key="link.uuid" v-dragging="{item:link,list:links,group:'links'}">
+        <a @click.prevent="directTo(link.link)" v-if="!!link.link" :href="link.link">{{link.text}}</a>
+        <span v-else>{{link.text}}</span>
         <v-icon small @click="deleteLink(link)">delete</v-icon>
       </li>
     </ul>
@@ -66,6 +67,13 @@ export default {
   },
   mounted: function () {
     this.links = linkStore.fetch()
+
+    this.$dragging.$on('dragged', ({ value }) => {
+        if(value.group === 'links'){
+          this.links = value.list
+          linkStore.save(this.links)
+        }
+      })
   }
 }
 </script>

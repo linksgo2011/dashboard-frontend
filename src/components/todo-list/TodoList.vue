@@ -18,6 +18,7 @@
           class="todo"
           :key="todo.id"
           :class="{ completed: todo.completed}"
+          v-dragging="{item:todo,list:filteredTodos,group:'todos'}"
         >
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
@@ -177,6 +178,14 @@ export default {
         el.focus()
       }
     }
+  },
+  mounted:function () {
+      this.$dragging.$on('dragged', ({ value }) => {
+        if(value.group === 'todos'){
+          this.todos = value.list
+          todoStorage.save(this.todos)
+        }
+      })
   }
 }
 </script>

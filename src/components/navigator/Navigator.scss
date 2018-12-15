@@ -40,13 +40,12 @@
             width: 50%;
             overflow: hidden;
             text-overflow : ellipsis;
+            min-height:32px;
             a {
                 font-size:14px;
                 color: $primaryTextColor; 
                 text-decoration: none;
-            }
-              a:hover {
-                color:$primary; 
+                color: $primary;
             }
             line-height: 30px;
             padding: 0px 30px;
