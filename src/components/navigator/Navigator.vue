@@ -1,6 +1,6 @@
 <template>
   <section class="navigator" id="navigator">
-    <form @submit.stop.prevent="addLink()" class="navigator-add-form">
+    <form @submit.stop.prevent="handSumit()" class="navigator-add-form">
       <div class="contrls">
         <div class="input-contrl">
           <label for="text">Text</label>
@@ -13,14 +13,16 @@
         </div>
       </div>
       <div class="buttons">
-        <button type="submit">Add</button>
+        <button type="submit" v-if="form.createdModeIndex === undefined">Add</button>
+        <button type="submit" v-else>Edit</button>
       </div>
     </form>
     <ul class="links-wrapper">
-      <li v-for="link in links" :key="link.uuid" v-dragging="{item:link,list:links,group:'links'}">
+      <li v-for="(link,index) in links" :key="link.uuid" v-dragging="{item:link,list:links,group:'links'}">
         <a @click.prevent="directTo(link.link)" v-if="!!link.link" :href="link.link">{{link.text}}</a>
         <span v-else>{{link.text}}</span>
-        <v-icon small @click="deleteLink(link)">delete</v-icon>
+        <v-icon small @click="enableEditMode(link,index)" class="icon-edit">edit</v-icon>
+        <v-icon small @click="deleteLink(link)" class="icon-delete">delete</v-icon>
       </li>
     </ul>
   </section>
@@ -36,11 +38,19 @@ export default {
       links: [],
       form: {
         text: '',
-        link: ''
+        link: '',
+        createdModeIndex:undefined
       }
     }
   },
   methods: {
+    handSumit: function(){
+      if(this.form.createdModeIndex === undefined){
+        this.addLink()
+      }else{
+        this.editLink()
+      }
+    },
     addLink: function () {
       this.links = [
         ...this.links,
@@ -54,6 +64,28 @@ export default {
 
       this.form.text = ''
       this.form.link = ''
+    },
+    editLink: function () {
+      const currentLink = this.links[this.form.createdModeIndex]
+      currentLink.text = this.form.text
+      currentLink.link = this.form.link
+
+      this.links = [
+        ...this.links
+      ]
+      linkStore.save(this.links)
+    
+      this.quitEditMode()
+    },
+    enableEditMode(link,index){
+      this.form.text = link.text
+      this.form.link = link.link
+      this.form.createdModeIndex = index
+    },
+    quitEditMode(){
+      this.form.text = ''
+      this.form.link = ''
+      this.form.createdModeIndex = undefined
     },
     deleteLink (link) {
       this.links = [

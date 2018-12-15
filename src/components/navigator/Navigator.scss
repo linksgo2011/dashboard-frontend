@@ -57,9 +57,14 @@
                 display: none;
                 position: absolute;
                 top:5px;
-                right:10px;
                 &:hover{
                     color: $primary;
+                }
+                &.icon-delete{
+                    right:5px;
+                }
+                &.icon-edit{
+                    right:20px;
                 }
             }
             
